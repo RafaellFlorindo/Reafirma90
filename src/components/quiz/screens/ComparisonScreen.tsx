@@ -1,10 +1,29 @@
-import ImagePlaceholder from "@/components/quiz/ImagePlaceholder";
+import Image from "next/image";
 import PrimaryButton from "@/components/quiz/PrimaryButton";
 import { comparisonContent } from "@/lib/quizFlow";
 
 type ComparisonScreenProps = {
   onNext: () => void;
 };
+
+function ComparisonPhoto({ src, label }: { src: string; label: string }) {
+  return (
+    <div className="flex flex-col gap-2">
+      <div className="relative aspect-[320/566] w-full overflow-hidden rounded-3xl border border-rose-light/70">
+        <Image
+          src={src}
+          alt={label}
+          fill
+          sizes="(max-width: 640px) 45vw, 220px"
+          className="object-cover"
+        />
+      </div>
+      <span className="text-center text-xs font-bold uppercase tracking-[0.08em] text-rose-dark">
+        {label}
+      </span>
+    </div>
+  );
+}
 
 export default function ComparisonScreen({ onNext }: ComparisonScreenProps) {
   return (
@@ -13,8 +32,8 @@ export default function ComparisonScreen({ onNext }: ComparisonScreenProps) {
         {comparisonContent.title}
       </h1>
       <div className="animate-quiz-fade stagger-1 grid grid-cols-2 gap-3">
-        <ImagePlaceholder label="antes" />
-        <ImagePlaceholder label="depois" />
+        <ComparisonPhoto src="/antes.png" label="Antes" />
+        <ComparisonPhoto src="/depois.png" label="Depois" />
       </div>
       <p className="animate-quiz-fade stagger-2 text-base leading-relaxed text-ink-soft">
         {comparisonContent.body}

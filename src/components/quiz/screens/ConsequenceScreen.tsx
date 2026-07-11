@@ -1,4 +1,4 @@
-import ImagePlaceholder from "@/components/quiz/ImagePlaceholder";
+import Image from "next/image";
 import PrimaryButton from "@/components/quiz/PrimaryButton";
 import { consequenceContent } from "@/lib/quizFlow";
 
@@ -12,8 +12,14 @@ export default function ConsequenceScreen({ onNext }: ConsequenceScreenProps) {
       <h1 className="animate-quiz-fade font-display text-[1.75rem] font-semibold italic leading-[1.2] text-ink">
         {consequenceContent.title}
       </h1>
-      <div className="animate-quiz-fade stagger-1">
-        <ImagePlaceholder label="imagem emocional aqui" />
+      <div className="animate-quiz-fade stagger-1 relative aspect-[1600/872] w-full overflow-hidden rounded-3xl border border-rose-light/70">
+        <Image
+          src="/emocional.jpg"
+          alt=""
+          fill
+          sizes="(max-width: 640px) 100vw, 448px"
+          className="object-cover"
+        />
       </div>
       <p className="animate-quiz-fade stagger-2 text-base leading-relaxed text-ink-soft">
         {consequenceContent.body}
