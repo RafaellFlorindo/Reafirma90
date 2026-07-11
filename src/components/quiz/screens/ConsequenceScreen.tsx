@@ -17,7 +17,7 @@ export default function ConsequenceScreen({ onNext }: ConsequenceScreenProps) {
           src="/emocional.jpg"
           alt=""
           fill
-          sizes="(max-width: 640px) 100vw, 448px"
+          unoptimized
           className="object-cover"
         />
       </div>

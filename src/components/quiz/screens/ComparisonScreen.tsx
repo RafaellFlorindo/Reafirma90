@@ -14,7 +14,7 @@ function ComparisonPhoto({ src, label }: { src: string; label: string }) {
           src={src}
           alt={label}
           fill
-          sizes="(max-width: 640px) 45vw, 220px"
+          unoptimized
           className="object-cover"
         />
       </div>

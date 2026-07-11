@@ -1,6 +1,7 @@
 "use client";
 
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
+import { preload } from "react-dom";
 import QuizProgressBar from "@/components/quiz/QuizProgressBar";
 import ScreenTransition from "@/components/quiz/ScreenTransition";
 import TransitionScreen from "@/components/quiz/TransitionScreen";
@@ -53,9 +54,17 @@ function toAnswers(state: QuizState): QuizAnswers {
   };
 }
 
+const IMAGES_TO_PRELOAD = ["/antes.png", "/depois.png", "/emocional.jpg"];
+
 export default function QuizContainer() {
   const [state, dispatch] = useReducer(quizReducer, initialState);
   const currentStep = quizFlow[state.step];
+
+  useEffect(() => {
+    for (const src of IMAGES_TO_PRELOAD) {
+      preload(src, { as: "image" });
+    }
+  }, []);
 
   const progress = (state.step / (TOTAL_STEPS - 1)) * 100;
   const showProgressBar = currentStep.type !== "result";
