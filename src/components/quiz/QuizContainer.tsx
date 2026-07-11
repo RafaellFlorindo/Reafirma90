@@ -9,7 +9,6 @@ import QuestionScreen from "@/components/quiz/screens/QuestionScreen";
 import ConsequenceScreen from "@/components/quiz/screens/ConsequenceScreen";
 import ComparisonScreen from "@/components/quiz/screens/ComparisonScreen";
 import AnalyzingScreen from "@/components/quiz/screens/AnalyzingScreen";
-import LeadCaptureScreen from "@/components/quiz/screens/LeadCaptureScreen";
 import ResultScreen from "@/components/quiz/screens/ResultScreen";
 import { quizFlow, transitionContent } from "@/lib/quizFlow";
 import { sendQuizWebhook } from "@/lib/sendQuizWebhook";
@@ -77,16 +76,8 @@ export default function QuizContainer() {
     dispatch({ type: "BACK" });
   }
 
-  function handleLeadSubmit(values: {
-    nome: string;
-    email: string;
-    whatsapp: string;
-  }) {
-    const fullAnswers = toAnswers({ ...state, ...values });
-    void sendQuizWebhook(fullAnswers);
-    dispatch({ type: "SET_ANSWER", field: "nome", value: values.nome });
-    dispatch({ type: "SET_ANSWER", field: "email", value: values.email });
-    dispatch({ type: "SET_ANSWER", field: "whatsapp", value: values.whatsapp });
+  function handleAnalyzingComplete() {
+    void sendQuizWebhook(toAnswers(state));
     dispatch({ type: "NEXT" });
   }
 
@@ -119,18 +110,7 @@ export default function QuizContainer() {
       case "comparison":
         return <ComparisonScreen onNext={handleNext} />;
       case "analyzing":
-        return <AnalyzingScreen onComplete={handleNext} />;
-      case "leadCapture":
-        return (
-          <LeadCaptureScreen
-            initialValues={{
-              nome: state.nome,
-              email: state.email,
-              whatsapp: state.whatsapp,
-            }}
-            onSubmit={handleLeadSubmit}
-          />
-        );
+        return <AnalyzingScreen onComplete={handleAnalyzingComplete} />;
       case "result":
         return <ResultScreen answers={toAnswers(state)} />;
       default:

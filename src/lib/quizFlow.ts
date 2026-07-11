@@ -141,6 +141,5 @@ export const quizFlow: FlowStep[] = [
   { type: "consequence" },
   { type: "comparison" },
   { type: "analyzing" },
-  { type: "leadCapture" },
   { type: "result" },
 ];
