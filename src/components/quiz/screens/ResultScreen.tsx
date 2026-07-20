@@ -5,8 +5,10 @@ import FAQAccordion from "@/components/quiz/FAQAccordion";
 import Kicker from "@/components/quiz/Kicker";
 import PrimaryButton from "@/components/quiz/PrimaryButton";
 import {
+  GUARANTEE_DAYS,
   PRODUCT_NAME,
   PRODUCT_PRICE,
+  URGENCY_LINE,
   buildDiagnosis,
   buildOfferBullets,
   faqItems,
@@ -49,6 +51,9 @@ export default function ResultScreen({ answers }: ResultScreenProps) {
         <p className="animate-quiz-fade stagger-3 text-sm leading-relaxed text-ink-soft">
           E além do corpo, {bloqueioMessage}
         </p>
+        <p className="animate-quiz-fade stagger-3 w-full rounded-2xl bg-terracotta-dark/[0.06] p-4 text-sm font-semibold leading-relaxed text-terracotta-dark">
+          {URGENCY_LINE}
+        </p>
       </div>
 
       <div className="animate-quiz-fade stagger-3 relative overflow-hidden rounded-[2rem] border border-rose-light/70 bg-white/80 p-7 shadow-[0_24px_50px_-24px_rgba(148,71,42,0.35)]">
@@ -57,15 +62,20 @@ export default function ResultScreen({ answers }: ResultScreenProps) {
           className="pointer-events-none absolute -top-16 -right-16 h-40 w-40 rounded-full bg-gradient-to-br from-rose-light to-blush opacity-60 blur-2xl"
         />
         <div className="relative flex flex-col gap-1 text-center">
+          <Kicker className="mx-auto mb-2">Sua rotina personalizada</Kicker>
           <h2 className="font-display text-2xl font-semibold text-ink">
             {PRODUCT_NAME}
           </h2>
           <p className="text-sm text-ink-soft">
-            Uma rotina pensada para apoiar a sua recuperação pós-parto, no seu
-            ritmo.
+            O passo a passo guiado pra reafirmar sua barriga no seu ritmo,
+            sem academia, sem dieta restritiva e sem precisar de horas livres
+            que você não tem.
           </p>
           <p className="mt-2 font-display text-4xl font-semibold text-terracotta-dark">
             {PRODUCT_PRICE}
+          </p>
+          <p className="text-xs font-semibold uppercase tracking-wide text-ink-soft">
+            Pagamento único · Acesso imediato
           </p>
         </div>
 
@@ -91,10 +101,26 @@ export default function ResultScreen({ answers }: ResultScreenProps) {
           ))}
         </ul>
 
-        <div className="relative mt-6">
+        <div className="relative mt-6 flex flex-col items-center gap-3">
           <PrimaryButton href={checkoutUrl} className="text-[0.95rem]">
-            Quero minha rotina agora
+            Sim, quero começar agora
           </PrimaryButton>
+          <div className="flex items-center gap-1.5 text-xs font-semibold text-ink-soft">
+            <svg
+              width="13"
+              height="13"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <rect x="4" y="10" width="16" height="10" rx="2" />
+              <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+            </svg>
+            Compra 100% segura · Garantia incondicional de {GUARANTEE_DAYS} dias
+          </div>
         </div>
       </div>
 

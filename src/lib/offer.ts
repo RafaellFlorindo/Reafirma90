@@ -8,6 +8,9 @@ import {
 
 export const PRODUCT_NAME = "Reafirma 90";
 export const PRODUCT_PRICE = "R$ 47";
+export const GUARANTEE_DAYS = 7;
+export const URGENCY_LINE =
+  "Cada semana que passa sem uma rotina é mais uma semana que o corpo se acostuma do jeito que está. Você não precisa começar perfeita, só precisa começar hoje.";
 
 const bloqueioMessages: Record<string, string> = {
   "evitar-espelho":
@@ -46,41 +49,43 @@ export function buildOfferBullets(answers: QuizAnswers): string[] {
 
   switch (answers.dorPrincipal) {
     case "pele-flacida":
-      bullets.push("Rotina com foco em estimular a elasticidade da pele");
+      bullets.push("Protocolo direto pra estimular a elasticidade da pele que incomoda");
       break;
     case "gordura-localizada":
-      bullets.push("Movimentos pensados pra tonificar a região abdominal");
+      bullets.push("Movimentos específicos pra tonificar a região abdominal, sem enrolação");
       break;
     case "as-duas-coisas":
-      bullets.push("Abordagem que trabalha pele e músculo ao mesmo tempo");
+      bullets.push("Método completo: ataca pele solta e gordura localizada ao mesmo tempo");
       break;
     default:
-      bullets.push("Rotina completa, sem você precisar diagnosticar sozinha");
+      bullets.push("Rotina completa, você não precisa diagnosticar nada sozinha");
   }
 
   switch (answers.tempoDisponivel) {
     case "menos-10-min":
-      bullets.push("Sessões pensadas pra caber em menos de 10 minutos");
+      bullets.push("Cabe em menos de 10 minutos, mesmo no dia mais corrido");
       break;
     case "10-a-20-min":
-      bullets.push("Sessões de 10 a 20 minutos, no seu ritmo");
+      bullets.push("Sessões de 10 a 20 minutos, encaixa na sua rotina hoje");
       break;
     case "mais-20-min":
-      bullets.push("Progressão que aproveita bem o tempo que você já tem");
+      bullets.push("Progressão pensada pra render o tempo que você já separa");
       break;
     default:
-      bullets.push("Rotina flexível pra encaixar nos intervalos mais corridos");
+      bullets.push("Rotina flexível, feita pra dias imprevisíveis com bebê");
   }
 
   if (answers.amamentando === "sim") {
-    bullets.push("Movimentos seguros pra quem está amamentando");
+    bullets.push("100% seguro pra quem está amamentando");
   }
 
   if (answers.tipoParto === "cesarea") {
-    bullets.push("Progressão que respeita a recuperação da cesárea");
+    bullets.push("Progressão que respeita sua recuperação da cesárea");
   } else if (answers.tipoParto === "normal") {
     bullets.push("Progressão adaptada à recuperação do parto normal");
   }
+
+  bullets.push(`Acesso imediato + garantia de ${GUARANTEE_DAYS} dias`);
 
   return bullets;
 }
@@ -90,6 +95,10 @@ export const faqItems: { question: string; answer: string }[] = [
     question: "Funciona pro meu caso (cesárea ou normal)?",
     answer:
       "Sim. A rotina se adapta ao tipo de parto e à fase de recuperação de cada mulher. Os movimentos respeitam o momento do seu corpo, seja ele parto normal ou cesárea.",
+  },
+  {
+    question: "E se eu não gostar ou achar que não é pra mim?",
+    answer: `Você tem ${GUARANTEE_DAYS} dias de garantia incondicional a partir da compra. Se por qualquer motivo não for pra você, é só pedir o reembolso, sem burocracia e sem perguntas.`,
   },
   {
     question: "E se eu estiver amamentando?",
