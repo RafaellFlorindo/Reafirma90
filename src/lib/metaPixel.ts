@@ -20,3 +20,18 @@ export function trackPageView() {
     console.log("[MetaPixel] track PageView");
   }
 }
+
+export function trackQuizCompleted() {
+  const eventId = crypto.randomUUID();
+
+  callFbq(
+    "trackCustom",
+    "QuizCompleted",
+    { content_name: "Quiz Reafirma 90" },
+    { eventID: eventId }
+  );
+
+  if (isDev) {
+    console.log("[MetaPixel] trackCustom QuizCompleted", { eventId });
+  }
+}

@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useRef } from "react";
 import FAQAccordion from "@/components/quiz/FAQAccordion";
 import Kicker from "@/components/quiz/Kicker";
 import PrimaryButton from "@/components/quiz/PrimaryButton";
@@ -9,6 +12,7 @@ import {
   faqItems,
   getBloqueioMessage,
 } from "@/lib/offer";
+import { trackQuizCompleted } from "@/lib/metaPixel";
 import type { QuizAnswers } from "@/types/quiz";
 
 type ResultScreenProps = {
@@ -16,6 +20,14 @@ type ResultScreenProps = {
 };
 
 export default function ResultScreen({ answers }: ResultScreenProps) {
+  const hasTrackedCompletion = useRef(false);
+
+  useEffect(() => {
+    if (hasTrackedCompletion.current) return;
+    hasTrackedCompletion.current = true;
+    trackQuizCompleted();
+  }, []);
+
   const checkoutUrl = process.env.NEXT_PUBLIC_CHECKOUT_URL || "#";
   const diagnosis = buildDiagnosis(answers);
   const bullets = buildOfferBullets(answers);
